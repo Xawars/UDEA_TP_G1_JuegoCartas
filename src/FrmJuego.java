@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -7,6 +8,9 @@ import javax.swing.JTabbedPane;
 
 public class FrmJuego extends JFrame {
 
+    JPanel pnlJugador1, pnlJugador2;
+
+    // metodo constructor
     public FrmJuego() {
         setSize(500, 300);
         setTitle("Juego de Cartas");
@@ -27,13 +31,47 @@ public class FrmJuego extends JFrame {
         add(tpJugadores);
 
         // crear el panel para el JUGADOR 1
-        JPanel pnlJugador1 = new JPanel();
+        pnlJugador1 = new JPanel();
         pnlJugador1.setBackground(new Color(0, 255, 0));
         tpJugadores.add("Martín Estrada Contreras", pnlJugador1);
 
-        JPanel pnlJugador2 = new JPanel();
+        pnlJugador2 = new JPanel();
         pnlJugador2.setBackground(new Color(0, 255, 255));
         tpJugadores.add("Raúl Vidal", pnlJugador2);
+
+        // eventos
+        btnRepartir.addActionListener(evento -> {
+            repartir();
+        });
+
+        btnVerificar.addActionListener(evento -> {
+            verificar();
+        });
+
+        /* 
+        btnVerificar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evento){
+                verificar();
+            }
+        });
+        */
+
+    }
+
+    private Jugador jugador1=new Jugador();
+    private Jugador jugador2=new Jugador();
+
+    private void repartir() {
+
+        jugador1.repartir();
+        jugador1.mostrar(pnlJugador1);
+
+        jugador2.repartir();
+        jugador2.mostrar(pnlJugador2);
+        
+    }
+
+    private void verificar() {
 
     }
 
