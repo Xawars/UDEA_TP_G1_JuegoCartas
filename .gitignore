@@ -8,6 +8,9 @@
 *.zip
 *.tar.gz
 
-#vs code
+# vs code / salida
 .vscode/
 bin/
+
+# notas de estudio locales (no entregar al profe)
+notas/
