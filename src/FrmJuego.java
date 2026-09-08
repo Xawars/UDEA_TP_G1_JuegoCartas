@@ -3,12 +3,14 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class FrmJuego extends JFrame {
 
-    JPanel pnlJugador1, pnlJugador2;
+    private JPanel pnlJugador1, pnlJugador2;
+    private JTabbedPane tpJugadores;
 
     // metodo constructor
     public FrmJuego() {
@@ -26,7 +28,7 @@ public class FrmJuego extends JFrame {
         add(btnVerificar);
 
         // agregar un conjunto de pestañas
-        JTabbedPane tpJugadores = new JTabbedPane();
+        tpJugadores = new JTabbedPane();
         tpJugadores.setBounds(10, 45, 470, 200);
         add(tpJugadores);
 
@@ -48,18 +50,18 @@ public class FrmJuego extends JFrame {
             verificar();
         });
 
-        /* 
-        btnVerificar.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent evento){
-                verificar();
-            }
-        });
-        */
+        /*
+         * btnVerificar.addActionListener(new ActionListener(){
+         * public void actionPerformed(ActionEvent evento){
+         * verificar();
+         * }
+         * });
+         */
 
     }
 
-    private Jugador jugador1=new Jugador();
-    private Jugador jugador2=new Jugador();
+    private Jugador jugador1 = new Jugador();
+    private Jugador jugador2 = new Jugador();
 
     private void repartir() {
 
@@ -68,11 +70,22 @@ public class FrmJuego extends JFrame {
 
         jugador2.repartir();
         jugador2.mostrar(pnlJugador2);
-        
+
     }
 
     private void verificar() {
-
+        String mensaje = "";
+        switch (tpJugadores.getSelectedIndex()) {
+            case 0:
+                mensaje = jugador1.getGrupos();
+                break;
+            case 1:
+                mensaje = jugador2.getGrupos();
+                break;
+        }
+        if (!mensaje.isEmpty()) {
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
     }
 
 }
