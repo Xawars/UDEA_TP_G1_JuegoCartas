@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,8 +10,8 @@ public class FrmJuego extends JFrame {
 
     private JPanel pnlJugador1, pnlJugador2;
     private JTabbedPane tpJugadores;
+    private int cantidadBarajas = 1;
 
-    // metodo constructor
     public FrmJuego() {
         setSize(500, 300);
         setTitle("Juego de Cartas");
@@ -27,12 +26,10 @@ public class FrmJuego extends JFrame {
         btnVerificar.setBounds(120, 10, 100, 25);
         add(btnVerificar);
 
-        // agregar un conjunto de pestañas
         tpJugadores = new JTabbedPane();
         tpJugadores.setBounds(10, 45, 470, 200);
         add(tpJugadores);
 
-        // crear el panel para el JUGADOR 1
         pnlJugador1 = new JPanel();
         pnlJugador1.setBackground(new Color(0, 255, 0));
         tpJugadores.add("Martín Estrada Contreras", pnlJugador1);
@@ -41,7 +38,6 @@ public class FrmJuego extends JFrame {
         pnlJugador2.setBackground(new Color(0, 255, 255));
         tpJugadores.add("Raúl Vidal", pnlJugador2);
 
-        // eventos
         btnRepartir.addActionListener(evento -> {
             repartir();
         });
@@ -49,28 +45,17 @@ public class FrmJuego extends JFrame {
         btnVerificar.addActionListener(evento -> {
             verificar();
         });
-
-        /*
-         * btnVerificar.addActionListener(new ActionListener(){
-         * public void actionPerformed(ActionEvent evento){
-         * verificar();
-         * }
-         * });
-         */
-
     }
 
     private Jugador jugador1 = new Jugador();
     private Jugador jugador2 = new Jugador();
 
     private void repartir() {
-
-        jugador1.repartir();
+        int[] vecesUsada = new int[53];
+        jugador1.repartir(cantidadBarajas, vecesUsada);
         jugador1.mostrar(pnlJugador1);
-
-        jugador2.repartir();
+        jugador2.repartir(cantidadBarajas, vecesUsada);
         jugador2.mostrar(pnlJugador2);
-
     }
 
     private void verificar() {
